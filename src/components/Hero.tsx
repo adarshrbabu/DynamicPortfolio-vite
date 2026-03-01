@@ -83,16 +83,31 @@ export default function Hero() {
               <ArrowRight size={18} />
             </a>
             {profile?.resumeUrl && (
-              <a
-                href={`${import.meta.env.VITE_API_URL || ""}${profile.resumeUrl}`}
-                download="Adarsh-R-Babu-Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 text-white font-medium transition-all flex items-center gap-2 w-full sm:w-auto justify-center"
+              <button
+                onClick={async () => {
+                  try {
+                    const apiUrl = import.meta.env.VITE_API_URL || "";
+                    const res = await fetch(`${apiUrl}${profile.resumeUrl}`);
+                    const data = await res.json();
+
+                    if (data.success && data.base64Data) {
+                      const link = document.createElement("a");
+                      link.href = data.base64Data;
+                      link.download =
+                        data.filename || "Adarsh-R-Babu-Resume.pdf";
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }
+                  } catch (err) {
+                    console.error("Failed to download resume:", err);
+                  }
+                }}
+                className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 text-white font-medium transition-all flex items-center gap-2 w-full sm:w-auto justify-center cursor-pointer"
               >
                 <Download size={18} />
                 Download CV
-              </a>
+              </button>
             )}
           </div>
 
