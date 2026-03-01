@@ -52,14 +52,14 @@ export default function Projects() {
         ];
 
   return (
-    <section id="projects" className="py-24 px-6">
+    <section id="projects" className="py-16 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 md:text-center"
+          className="mb-12 md:text-center"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             Featured <span className="text-emerald-400">Projects</span>
@@ -73,7 +73,7 @@ export default function Projects() {
           {/* Vertical Line */}
           <div className="absolute left-0 md:left-1/2 transform md:-translate-x-px top-0 bottom-0 w-px bg-white/10 z-0"></div>
 
-          <div className="space-y-24">
+          <div className="space-y-12">
             {loading ? (
               <div className="flex justify-center py-20 w-full relative z-20">
                 <Loader2 className="animate-spin text-emerald-400" size={40} />
