@@ -49,70 +49,84 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center z-10 relative">
+        {/* Decorative Background Orbs for Transparency Aesthetic */}
+        <div className="absolute top-1/4 left-0 w-72 h-72 bg-emerald-500/20 rounded-full blur-[100px] -z-10 mix-blend-screen animate-pulse duration-10000"></div>
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen"></div>
+
         {/* Left Column: Content */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-start text-left"
+          className="flex flex-col items-start text-left relative z-10"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 mb-8">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-            <span className="text-xs font-medium text-emerald-400">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8 shadow-xl"
+          >
+            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]"></div>
+            <span className="text-xs font-bold tracking-widest uppercase text-emerald-300">
               {loading
                 ? "Loading profile..."
                 : profile?.heroSubtitle || "Software Engineer"}
             </span>
-          </div>
+          </motion.div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight text-white whitespace-pre-line">
+          {/* Gradient Text for Main Title */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 leading-[1.1] text-transparent bg-clip-text bg-linear-to-r from-white via-white to-emerald-400 drop-shadow-sm whitespace-pre-line pb-2">
             {loading ? "Loading..." : profile?.title}
           </h1>
 
-          <p className="text-gray-400 mb-10 max-w-lg leading-relaxed min-h-[80px]">
+          <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed min-h-[80px] font-medium">
             {loading ? null : profile?.heroParagraph}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 mb-10 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-5 mb-12 w-full sm:w-auto">
             <a
               href="#contact"
-              className="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-dark font-semibold transition-all flex items-center gap-2 w-full sm:w-auto justify-center"
+              className="group relative px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-dark font-bold text-lg transition-all flex items-center justify-center gap-3 w-full sm:w-auto overflow-hidden shadow-[0_0_40px_rgba(16,185,129,0.3)] hover:shadow-[0_0_60px_rgba(16,185,129,0.5)] hover:-translate-y-1"
             >
-              Contact Me
-              <ArrowRight size={18} />
+              <span className="relative z-10">Contact Me</span>
+              <ArrowRight
+                size={20}
+                className="relative z-10 transform group-hover:translate-x-1 transition-transform"
+              />
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
             </a>
             {profile?.resumeUrl && (
               <button
                 onClick={() => {
                   const apiUrl = import.meta.env.VITE_API_URL || "";
                   const targetUrl = `${apiUrl}${profile.resumeUrl}`;
-                  // Simply opening the URL will trigger a download because our backend
-                  // sets the 'Content-Disposition: attachment' header.
                   window.open(targetUrl, "_blank");
                 }}
-                className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 text-white font-medium transition-all flex items-center gap-2 w-full sm:w-auto justify-center cursor-pointer"
+                className="px-8 py-4 rounded-xl border-2 border-white/10 glass hover:bg-white/10 text-white font-bold text-lg transition-all flex items-center justify-center gap-3 w-full sm:w-auto hover:-translate-y-1 shadow-lg cursor-pointer"
               >
-                <Download size={18} />
+                <Download size={20} />
                 Download CV
               </button>
             )}
           </div>
 
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-400">Follow me:</span>
-            <div className="flex gap-3">
+          <div className="flex items-center gap-6 glass px-6 py-3 rounded-2xl border border-white/5">
+            <span className="text-sm font-semibold tracking-wider uppercase text-gray-500">
+              Connect
+            </span>
+            <div className="flex gap-4">
               {profile?.links?.map((link, i) => (
                 <a
                   key={i}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-emerald-400 hover:-translate-y-1 transition-all"
                 >
-                  {link.name.toLowerCase() === "github" && <Github size={20} />}
+                  {link.name.toLowerCase() === "github" && <Github size={22} />}
                   {link.name.toLowerCase() === "linkedin" && (
-                    <Linkedin size={20} />
+                    <Linkedin size={22} />
                   )}
                   {link.name.toLowerCase() !== "github" &&
                     link.name.toLowerCase() !== "linkedin" &&
@@ -121,9 +135,9 @@ export default function Hero() {
               ))}
               <a
                 href="#contact"
-                className="text-gray-400 hover:text-white transition-colors ml-2 border-l border-white/10 pl-4"
+                className="text-gray-400 hover:text-emerald-400 hover:-translate-y-1 transition-all ml-2 border-l border-white/10 pl-5"
               >
-                <Mail size={20} />
+                <Mail size={22} />
               </a>
             </div>
           </div>
@@ -131,31 +145,31 @@ export default function Hero() {
 
         {/* Right Column: Photo Card */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative flex justify-center lg:justify-end"
+          initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="relative flex justify-center lg:justify-end mt-10 lg:mt-0"
         >
-          <div className="relative group">
+          <div className="relative group w-full max-w-md">
             {/* Ambient background glow */}
-            <div className="absolute inset-0 bg-emerald-500/20 rounded-3xl blur-2xl group-hover:bg-emerald-500/30 transition-colors duration-500"></div>
+            <div className="absolute inset-0 bg-emerald-500/30 rounded-[2.5rem] blur-3xl group-hover:bg-emerald-400/40 group-hover:blur-2xl transition-all duration-700"></div>
 
-            <div className="relative glass-dark border border-white/5 rounded-3xl p-3 shadow-2xl overflow-hidden aspect-3/4 max-w-sm w-full mx-auto">
+            <div className="relative bg-white/5 backdrop-blur-2xl border border-white/20 rounded-[2rem] p-4 shadow-2xl overflow-hidden aspect-[4/5] w-full mx-auto transform transition-transform duration-700 group-hover:-translate-y-2">
               {loading ? (
-                <div className="absolute inset-0 bg-emerald-500/10 rounded-2xl flex items-center justify-center">
+                <div className="absolute inset-0 bg-emerald-500/10 rounded-3xl flex items-center justify-center">
                   <Loader2
                     className="animate-spin text-emerald-400"
-                    size={30}
+                    size={40}
                   />
                 </div>
               ) : (
                 <div className="relative w-full h-full rounded-2xl overflow-hidden group/img">
-                  <div className="absolute inset-0 bg-linear-to-tr from-emerald-900/60 to-dark/40 mix-blend-multiply z-10 transition-opacity duration-500 group-hover/img:opacity-0" />
-                  <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.6)] z-10 rounded-2xl pointer-events-none" />
+                  <div className="absolute inset-0 bg-linear-to-tr from-emerald-900/60 to-transparent mix-blend-multiply z-10 transition-opacity duration-500 group-hover/img:opacity-0" />
+                  <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.8)] z-10 pointer-events-none rounded-2xl" />
                   <img
                     src={"/Smiling man against yellow backdrop.png"}
                     alt="Portrait"
-                    className="w-full h-full object-cover brightness-75 contrast-125 saturate-50 group-hover/img:brightness-100 group-hover/img:saturate-100 group-hover/img:scale-105 transition-all duration-700"
+                    className="w-full h-full object-cover object-top brightness-90 contrast-125 saturate-50 group-hover/img:brightness-110 group-hover/img:saturate-100 group-hover/img:scale-110 transition-all duration-1000 ease-out"
                   />
                 </div>
               )}
