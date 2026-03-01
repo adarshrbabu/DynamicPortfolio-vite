@@ -46,66 +46,89 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full"
+          className="w-full relative"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white md:text-center">
+          {/* Decorative Quote Mark */}
+          <div className="absolute -top-10 -left-6 text-7xl text-emerald-500/10 font-serif select-none pointer-events-none">
+            "
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-bold mb-10 text-white md:text-center tracking-tight">
             About <span className="text-emerald-400">Me</span>
           </h2>
 
-          <div className="space-y-6 text-gray-300 text-lg leading-relaxed relative min-h-[150px]">
+          <div className="space-y-8 relative min-h-[150px]">
             {loading ? (
               <div className="absolute inset-0 flex items-center justify-center">
                 <Loader2 className="animate-spin text-emerald-400" size={30} />
               </div>
             ) : profile?.aboutParagraphs ? (
-              profile.aboutParagraphs.map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))
+              <div className="max-w-3xl mx-auto flex flex-col gap-6">
+                {profile.aboutParagraphs.map((paragraph, idx) => (
+                  <p
+                    key={idx}
+                    className={`leading-relaxed ${
+                      idx === 0
+                        ? "text-xl md:text-2xl font-medium text-emerald-50 tracking-wide"
+                        : "text-lg text-gray-400"
+                    }`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             ) : (
-              <p>Profile information is currently unavailable.</p>
+              <p className="text-center text-gray-400">
+                Profile information is currently unavailable.
+              </p>
             )}
           </div>
 
-          <div className="mt-12 flex flex-wrap gap-4 overflow-x-auto pb-4 justify-center hide-scrollbar">
+          <div className="mt-16 pt-12 border-t border-white/5 flex flex-wrap gap-6 overflow-x-auto pb-4 justify-center hide-scrollbar">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="glass px-8 py-5 rounded-2xl flex-1 max-w-[200px] text-center border-t border-white/10 shrink-0"
+              className="group glass relative overflow-hidden px-8 py-6 rounded-2xl flex-1 max-w-[220px] text-center border border-white/10 hover:border-emerald-500/30 hover:-translate-y-2 transition-all duration-300 shrink-0 shadow-lg"
             >
-              <div className="text-4xl font-bold text-emerald-400 mb-2">
+              <div className="absolute inset-0 bg-linear-to-br from-emerald-500/0 via-emerald-500/0 to-emerald-500/0 group-hover:from-emerald-500/10 group-hover:to-transparent transition-all duration-500"></div>
+              <div className="relative z-10 text-5xl font-black text-white mb-2 group-hover:text-emerald-300 transition-colors">
                 {loading ? "-" : `${profile?.yearsExperience || 0}+`}
               </div>
-              <div className="text-sm text-gray-400 font-medium tracking-wide uppercase">
+              <div className="relative z-10 text-xs text-emerald-400 font-bold tracking-widest uppercase">
                 Years Exp
               </div>
             </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="glass px-8 py-5 rounded-2xl flex-1 max-w-[200px] text-center border-t border-white/10 shrink-0"
+              className="group glass relative overflow-hidden px-8 py-6 rounded-2xl flex-1 max-w-[220px] text-center border border-white/10 hover:border-emerald-500/30 hover:-translate-y-2 transition-all duration-300 shrink-0 shadow-lg"
             >
-              <div className="text-4xl font-bold text-emerald-400 mb-2">
+              <div className="absolute inset-0 bg-linear-to-br from-emerald-500/0 via-emerald-500/0 to-emerald-500/0 group-hover:from-emerald-500/10 group-hover:to-transparent transition-all duration-500"></div>
+              <div className="relative z-10 text-5xl font-black text-white mb-2 group-hover:text-emerald-300 transition-colors">
                 20+
               </div>
-              <div className="text-sm text-gray-400 font-medium tracking-wide uppercase">
+              <div className="relative z-10 text-xs text-emerald-400 font-bold tracking-widest uppercase">
                 Projects
               </div>
             </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="glass px-8 py-5 rounded-2xl flex-1 max-w-[200px] text-center border-t border-white/10 shrink-0"
+              className="group glass relative overflow-hidden px-8 py-6 rounded-2xl flex-1 max-w-[220px] text-center border border-white/10 hover:border-emerald-500/30 hover:-translate-y-2 transition-all duration-300 shrink-0 shadow-lg"
             >
-              <div className="text-4xl font-bold text-emerald-400 mb-2">
+              <div className="absolute inset-0 bg-linear-to-br from-emerald-500/0 via-emerald-500/0 to-emerald-500/0 group-hover:from-emerald-500/10 group-hover:to-transparent transition-all duration-500"></div>
+              <div className="relative z-10 text-5xl font-black text-white mb-2 group-hover:text-emerald-300 transition-colors">
                 100%
               </div>
-              <div className="text-sm text-gray-400 font-medium tracking-wide uppercase">
+              <div className="relative z-10 text-xs text-emerald-400 font-bold tracking-widest uppercase">
                 Remote Ready
               </div>
             </motion.div>
