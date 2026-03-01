@@ -27,10 +27,10 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 md:top-6 ${
         isScrolled
-          ? "glass-dark border-b border-white/10 shadow-2xl py-4 px-6 md:px-12 bg-dark/90 backdrop-blur-xl"
-          : "bg-transparent py-6 px-6 md:px-12 border-transparent"
+          ? "md:max-w-4xl md:mx-auto glass-dark border-white/10 md:rounded-full shadow-2xl py-4 px-6 md:px-8 bg-dark/80 backdrop-blur-xl"
+          : "md:max-w-6xl md:mx-auto bg-transparent py-6 px-6 md:px-8 border-transparent"
       } flex justify-between items-center`}
     >
       <a href="#" className="text-2xl font-black tracking-tighter text-white">
