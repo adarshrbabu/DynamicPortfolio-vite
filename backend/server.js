@@ -38,12 +38,14 @@ const contactRoutes = require("./routes/contact");
 const projectRoutes = require("./routes/project");
 const profileRoutes = require("./routes/profile");
 const experienceRoutes = require("./routes/experience");
+const resumeRoutes = require("./routes/resume");
 
 // Use Routes
 app.use("/api/contact", contactRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/experience", experienceRoutes);
+app.use("/api/resume", resumeRoutes);
 
 // Start server
 app.listen(PORT, () => {
