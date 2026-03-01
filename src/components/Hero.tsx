@@ -75,8 +75,8 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Gradient Text for Main Title */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 leading-[1.1] text-transparent bg-clip-text bg-linear-to-r from-white via-white to-emerald-400 drop-shadow-sm whitespace-pre-line pb-2">
+          {/* Main Title */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight text-white whitespace-pre-line">
             {loading ? "Loading..." : profile?.title}
           </h1>
 
@@ -87,14 +87,13 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center gap-5 mb-12 w-full sm:w-auto">
             <a
               href="#contact"
-              className="group relative px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-dark font-bold text-lg transition-all flex items-center justify-center gap-3 w-full sm:w-auto overflow-hidden shadow-[0_0_40px_rgba(16,185,129,0.3)] hover:shadow-[0_0_60px_rgba(16,185,129,0.5)] hover:-translate-y-1"
+              className="group relative px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-dark font-bold text-lg transition-all flex items-center justify-center gap-3 w-full sm:w-auto hover:-translate-y-1 shadow-lg"
             >
-              <span className="relative z-10">Contact Me</span>
+              Contact Me
               <ArrowRight
                 size={20}
-                className="relative z-10 transform group-hover:translate-x-1 transition-transform"
+                className="transform group-hover:translate-x-1 transition-transform"
               />
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
             </a>
             {profile?.resumeUrl && (
               <button
@@ -103,7 +102,7 @@ export default function Hero() {
                   const targetUrl = `${apiUrl}${profile.resumeUrl}`;
                   window.open(targetUrl, "_blank");
                 }}
-                className="px-8 py-4 rounded-xl border-2 border-white/10 glass hover:bg-white/10 text-white font-bold text-lg transition-all flex items-center justify-center gap-3 w-full sm:w-auto hover:-translate-y-1 shadow-lg cursor-pointer"
+                className="px-8 py-4 rounded-xl border border-white/20 glass hover:bg-white/10 text-white font-bold text-lg transition-all flex items-center justify-center gap-3 w-full sm:w-auto hover:-translate-y-1 shadow-lg cursor-pointer"
               >
                 <Download size={20} />
                 Download CV
@@ -150,26 +149,24 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="relative flex justify-center lg:justify-end mt-10 lg:mt-0"
         >
-          <div className="relative group w-full max-w-md">
+          <div className="relative group w-full max-w-sm mx-auto">
             {/* Ambient background glow */}
-            <div className="absolute inset-0 bg-emerald-500/30 rounded-[2.5rem] blur-3xl group-hover:bg-emerald-400/40 group-hover:blur-2xl transition-all duration-700"></div>
+            <div className="absolute inset-0 bg-emerald-500/20 rounded-3xl blur-2xl group-hover:bg-emerald-400/30 transition-all duration-500"></div>
 
-            <div className="relative bg-white/5 backdrop-blur-2xl border border-white/20 rounded-[2rem] p-4 shadow-2xl overflow-hidden aspect-[4/5] w-full mx-auto transform transition-transform duration-700 group-hover:-translate-y-2">
+            <div className="relative glass-dark border border-white/10 rounded-3xl p-3 shadow-2xl overflow-hidden aspect-4/5 w-full mx-auto transform transition-transform duration-500 group-hover:-translate-y-2">
               {loading ? (
-                <div className="absolute inset-0 bg-emerald-500/10 rounded-3xl flex items-center justify-center">
+                <div className="absolute inset-0 bg-emerald-500/10 rounded-2xl flex items-center justify-center">
                   <Loader2
                     className="animate-spin text-emerald-400"
                     size={40}
                   />
                 </div>
               ) : (
-                <div className="relative w-full h-full rounded-2xl overflow-hidden group/img">
-                  <div className="absolute inset-0 bg-linear-to-tr from-emerald-900/60 to-transparent mix-blend-multiply z-10 transition-opacity duration-500 group-hover/img:opacity-0" />
-                  <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.8)] z-10 pointer-events-none rounded-2xl" />
+                <div className="relative w-full h-full rounded-2xl overflow-hidden group/img bg-dark/50">
                   <img
                     src={"/Smiling man against yellow backdrop.png"}
                     alt="Portrait"
-                    className="w-full h-full object-cover object-top brightness-90 contrast-125 saturate-50 group-hover/img:brightness-110 group-hover/img:saturate-100 group-hover/img:scale-110 transition-all duration-1000 ease-out"
+                    className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-700 ease-out"
                   />
                 </div>
               )}
