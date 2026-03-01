@@ -94,23 +94,22 @@ router.get("/download/:filename", async (req, res) => {
 
     const file = files[0];
 
-    if (file.contentType === "application/pdf") {
-      res.set("Content-Type", file.contentType);
-      // inline allows viewing in browser, attachment forces download
-      res.set(
-        "Content-Disposition",
-        `attachment; filename="Adarsh-R-Babu-Resume.pdf"`,
-      );
+    const extensionMatch = file.filename.match(/\.([0-9a-z]+)(?:[\?#]|$)/i);
+    const extension = extensionMatch ? extensionMatch[1].toLowerCase() : "pdf";
+    const contentType =
+      file.contentType ||
+      (extension === "pdf" ? "application/pdf" : "application/octet-stream");
 
-      // Open a download stream and pipe it to the response
-      const downloadStream = gfsBucket.openDownloadStreamByName(file.filename);
-      downloadStream.pipe(res);
-    } else {
-      res.status(400).json({
-        success: false,
-        message: "Not a PDF file",
-      });
-    }
+    res.set("Content-Type", contentType);
+    // inline allows viewing in browser, attachment forces download
+    res.set(
+      "Content-Disposition",
+      `attachment; filename="Adarsh-R-Babu-Resume.${extension}"`,
+    );
+
+    // Open a download stream and pipe it to the response
+    const downloadStream = gfsBucket.openDownloadStreamByName(file.filename);
+    downloadStream.pipe(res);
   } catch (err) {
     res
       .status(500)
