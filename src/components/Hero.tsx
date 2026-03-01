@@ -84,8 +84,8 @@ export default function Hero() {
             </a>
             {profile?.resumeUrl && (
               <a
-                href={profile.resumeUrl}
-                download
+                href={`${import.meta.env.VITE_API_URL || ""}${profile.resumeUrl}`}
+                download="Adarsh-R-Babu-Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 text-white font-medium transition-all flex items-center gap-2 w-full sm:w-auto justify-center"
