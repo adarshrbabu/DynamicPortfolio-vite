@@ -122,22 +122,28 @@ export default function Projects() {
                     </h3>
 
                     {/* Elevated Description Box */}
-                    <div className="glass-dark border border-white/5 p-6 rounded-xl shadow-2xl mb-6 relative w-full lg:min-w-[120%]">
-                      <p className="text-gray-300 leading-relaxed text-base">
+                    <div className="group/box glass-dark border border-white/5 p-6 rounded-xl shadow-2xl mb-6 relative w-full lg:min-w-[120%] hover:bg-white/5 hover:border-emerald-500/30 hover:-translate-y-1 hover:shadow-emerald-900/20 transition-all duration-300">
+                      <div className="absolute inset-0 bg-linear-to-br from-emerald-500/0 to-emerald-500/0 group-hover/box:from-emerald-500/5 transition-all duration-500 rounded-xl rounded-tl-xl"></div>
+                      <p className="text-gray-300 leading-relaxed text-base relative z-10 group-hover/box:text-white transition-colors duration-300">
                         {project.description}
                       </p>
                     </div>
 
                     {/* Tech Stack */}
                     <ul
-                      className={`flex flex-wrap gap-x-4 gap-y-2 mb-8 font-mono text-sm text-gray-400 ${
+                      className={`flex flex-wrap gap-x-3 gap-y-2 mb-8 font-mono text-sm ${
                         isEven
                           ? "lg:justify-end justify-start"
                           : "justify-start"
                       }`}
                     >
                       {project.tech.map((tech, i) => (
-                        <li key={i}>{tech}</li>
+                        <li
+                          key={i}
+                          className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-emerald-300 hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-default transition-all duration-300"
+                        >
+                          {tech}
+                        </li>
                       ))}
                     </ul>
 
