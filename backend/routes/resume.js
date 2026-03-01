@@ -101,13 +101,11 @@ router.get("/download/:filename", async (req, res) => {
 
     downloadStream.on("error", (err) => {
       if (!res.headersSent) {
-        res
-          .status(500)
-          .json({
-            success: false,
-            message: "Error reading file stream",
-            error: err.message,
-          });
+        res.status(500).json({
+          success: false,
+          message: "Error reading file stream",
+          error: err.message,
+        });
       }
     });
   } catch (err) {
@@ -118,3 +116,5 @@ router.get("/download/:filename", async (req, res) => {
     }
   }
 });
+
+module.exports = router;
