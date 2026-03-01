@@ -95,8 +95,8 @@ export default function Projects() {
                 >
                   {/* Image Side */}
                   <div className="w-full lg:w-7/12 relative group cursor-pointer lg:-mx-4 z-0">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                    <div className="relative rounded-2xl overflow-hidden glass border border-white/10 aspect-[16/10] md:aspect-video transform transition-transform duration-500 group-hover:-translate-y-2">
+                    <div className="absolute -inset-1 bg-linear-to-r from-emerald-500 to-blue-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    <div className="relative rounded-2xl overflow-hidden glass border border-white/10 aspect-16/10 md:aspect-video transform transition-transform duration-500 group-hover:-translate-y-2">
                       <div className="absolute inset-0 bg-emerald-900/20 group-hover:bg-transparent transition-colors duration-500 z-10 mix-blend-overlay" />
                       <img
                         src={project.image}
