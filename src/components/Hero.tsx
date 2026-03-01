@@ -163,6 +163,10 @@ export default function Hero() {
                 </div>
               ) : (
                 <div className="relative w-full h-full rounded-2xl overflow-hidden group/img bg-dark/50">
+                  {/* Subtle shade gradient at bottom for depth */}
+                  <div className="absolute inset-0 bg-linear-to-t from-dark/80 via-dark/20 to-transparent z-10 pointer-events-none transition-opacity duration-500 group-hover/img:opacity-70" />
+                  {/* Inner shadow for the 3D 'embedded' feel */}
+                  <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.6)] z-10 pointer-events-none rounded-2xl" />
                   <img
                     src={"/Smiling man against yellow backdrop.png"}
                     alt="Portrait"
