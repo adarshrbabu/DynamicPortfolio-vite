@@ -87,7 +87,16 @@ export default function Hero() {
                 onClick={async () => {
                   try {
                     const apiUrl = import.meta.env.VITE_API_URL || "";
-                    const res = await fetch(`${apiUrl}${profile.resumeUrl}`);
+                    const targetUrl = `${apiUrl}${profile.resumeUrl}`;
+
+                    const res = await fetch(targetUrl, {
+                      method: "GET",
+                    });
+
+                    if (!res.ok) {
+                      throw new Error(`Server returned ${res.status}`);
+                    }
+
                     const data = await res.json();
 
                     if (data.success && data.base64Data) {
@@ -98,9 +107,14 @@ export default function Hero() {
                       document.body.appendChild(link);
                       link.click();
                       document.body.removeChild(link);
+                    } else {
+                      alert(
+                        "Backend returned success: false or missing PDF data.",
+                      );
                     }
                   } catch (err) {
                     console.error("Failed to download resume:", err);
+                    alert("Download failed: " + (err as Error).message);
                   }
                 }}
                 className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 text-white font-medium transition-all flex items-center gap-2 w-full sm:w-auto justify-center cursor-pointer"
