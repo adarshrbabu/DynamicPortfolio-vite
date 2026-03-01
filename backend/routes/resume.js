@@ -94,47 +94,27 @@ router.get("/download/:filename", async (req, res) => {
 
     const file = files[0];
 
-    // Convert the download stream to a base64 string
+    // Stream the raw binary data directly to the user's browser.
+    // The browser will natively download it because of the Content-Disposition header.
     const downloadStream = gfsBucket.openDownloadStreamByName(file.filename);
-
-    const chunks = [];
-
-    downloadStream.on("data", (chunk) => {
-      chunks.push(chunk);
-    });
-
-    downloadStream.on("end", () => {
-      const buffer = Buffer.concat(chunks);
-      const base64Data = buffer.toString("base64");
-
-      const extensionMatch = file.filename.match(/\.([0-9a-z]+)(?:[\?#]|$)/i);
-      const extension = extensionMatch
-        ? extensionMatch[1].toLowerCase()
-        : "pdf";
-      const contentType =
-        file.contentType ||
-        (extension === "pdf" ? "application/pdf" : "application/octet-stream");
-
-      res.status(200).json({
-        success: true,
-        filename: file.filename,
-        contentType: contentType,
-        base64Data: `data:${contentType};base64,${base64Data}`,
-      });
-    });
+    downloadStream.pipe(res);
 
     downloadStream.on("error", (err) => {
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: "Error reading file stream",
-          error: err.message,
-        });
+      if (!res.headersSent) {
+        res
+          .status(500)
+          .json({
+            success: false,
+            message: "Error reading file stream",
+            error: err.message,
+          });
+      }
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ success: false, message: "Server Error", error: err.message });
+    if (!res.headersSent) {
+      res
+        .status(500)
+        .json({ success: false, message: "Server Error", error: err.message });
+    }
   }
 });

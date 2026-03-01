@@ -84,38 +84,12 @@ export default function Hero() {
             </a>
             {profile?.resumeUrl && (
               <button
-                onClick={async () => {
-                  try {
-                    const apiUrl = import.meta.env.VITE_API_URL || "";
-                    const targetUrl = `${apiUrl}${profile.resumeUrl}`;
-
-                    const res = await fetch(targetUrl, {
-                      method: "GET",
-                    });
-
-                    if (!res.ok) {
-                      throw new Error(`Server returned ${res.status}`);
-                    }
-
-                    const data = await res.json();
-
-                    if (data.success && data.base64Data) {
-                      const link = document.createElement("a");
-                      link.href = data.base64Data;
-                      link.download =
-                        data.filename || "Adarsh-R-Babu-Resume.pdf";
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                    } else {
-                      alert(
-                        "Backend returned success: false or missing PDF data.",
-                      );
-                    }
-                  } catch (err) {
-                    console.error("Failed to download resume:", err);
-                    alert("Download failed: " + (err as Error).message);
-                  }
+                onClick={() => {
+                  const apiUrl = import.meta.env.VITE_API_URL || "";
+                  const targetUrl = `${apiUrl}${profile.resumeUrl}`;
+                  // Simply opening the URL will trigger a download because our backend
+                  // sets the 'Content-Disposition: attachment' header.
+                  window.open(targetUrl, "_blank");
                 }}
                 className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 text-white font-medium transition-all flex items-center gap-2 w-full sm:w-auto justify-center cursor-pointer"
               >
